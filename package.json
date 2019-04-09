@@ -1,0 +1,11 @@
+{
+  "name": "react-auth0",
+  "version": "1.0.0",
+  "description": "Easily integrate your react applications with Auth0",
+  "main": "index.js",
+  "author": "@lepozepo",
+  "license": "MIT",
+  "devDependencies": {
+    "@pika/pack": "^0.3.6"
+  }
+}
