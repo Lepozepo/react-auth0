@@ -1,5 +1,5 @@
 {
-  "name": "react-auth0",
+  "name": "react-auth0rize",
   "version": "1.0.0",
   "description": "Easily integrate your react applications with Auth0",
   "main": "index.js",
