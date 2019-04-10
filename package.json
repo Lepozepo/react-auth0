@@ -3,9 +3,43 @@
   "version": "1.0.0",
   "description": "Easily integrate your react applications with Auth0",
   "main": "index.js",
-  "author": "@lepozepo",
+  "author": "Marcelo Reyna",
   "license": "MIT",
+  "scripts": {
+    "pack:build": "pack build",
+    "pack:publish": "pack publish",
+    "test:lint": "eslint ./src --quiet -c ./.eslintrc.js"
+  },
+  "@pika/pack": {
+    "pipeline": [
+      [
+        "@pika/plugin-standard-pkg"
+      ],
+      [
+        "@pika/plugin-build-web"
+      ]
+    ]
+  },
   "devDependencies": {
-    "@pika/pack": "^0.3.6"
+    "@babel/core": "^7.4.3",
+    "@babel/plugin-proposal-class-properties": "^7.4.0",
+    "@babel/preset-react": "^7.0.0",
+    "@pika/pack": "^0.3.6",
+    "@pika/plugin-build-web": "^0.3.14",
+    "@pika/plugin-standard-pkg": "^0.3.14",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.12.4"
+  },
+  "dependencies": {
+    "auth0-js": "^9.10.1",
+    "lockr": "^0.8.5",
+    "lodash": "^4.17.11",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   }
 }
