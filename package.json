@@ -6,8 +6,8 @@
   "author": "Marcelo Reyna",
   "license": "MIT",
   "scripts": {
-    "pack:build": "pack build",
-    "pack:publish": "pack publish",
+    "build": "pack build",
+    "publish": "pack publish",
     "test:lint": "eslint ./src --quiet -c ./.eslintrc.js"
   },
   "@pika/pack": {
