@@ -1,6 +1,6 @@
 {
   "name": "react-auth0rize",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Easily integrate your react applications with Auth0",
   "main": "index.js",
   "author": "Marcelo Reyna",
@@ -9,6 +9,10 @@
     "build": "pack build",
     "publish": "pack publish",
     "test:lint": "eslint ./src --quiet -c ./.eslintrc.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lepozepo/react-auth0.git"
   },
   "@pika/pack": {
     "pipeline": [
