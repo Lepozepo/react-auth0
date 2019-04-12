@@ -13,6 +13,7 @@ export default class Auth0Client {
       responseType: 'token id_token',
       scope: 'openid',
       logoutRedirectUri: '/login',
+      storageKey: 'auth',
       ...props,
     };
 
@@ -30,14 +31,14 @@ export default class Auth0Client {
   }
 
   isAuthenticated = () => {
-    const currentAuth = Lockr.get('auth');
+    const currentAuth = Lockr.get(this.props.storageKey);
     return new Date().getTime() < get(currentAuth, 'expiresAt');
   };
 
   setSession = (authResult) => {
     const expiresAt = authResult.expiresIn * 1000 + new Date().getTime();
 
-    Lockr.set('auth', {
+    Lockr.set(this.props.storageKey, {
       ...authResult,
       expiresAt,
     });
@@ -48,7 +49,7 @@ export default class Auth0Client {
   };
 
   logout = () => {
-    Lockr.rm('auth');
+    Lockr.rm(this.props.storageKey);
     this.client.logout({
       returnTo: resolveUri(this.props.logoutRedirectUri),
       clientID: this.props.clientID,
@@ -56,7 +57,7 @@ export default class Auth0Client {
   };
 
   authenticate = () => new Promise((resolve, reject) => {
-    if (this.isAuthenticated()) return resolve(Lockr.get('auth'));
+    if (this.isAuthenticated()) return resolve(Lockr.get(this.props.storageKey));
     return this.client.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.setSession(authResult);
