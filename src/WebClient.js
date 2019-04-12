@@ -70,7 +70,7 @@ export default class Auth0Client {
   });
 
   renewSession = () => new Promise((resolve, reject) => {
-    const authSession = Lockr.get('auth');
+    const authSession = Lockr.get(this.props.storageKey);
     if (!authSession) return resolve(); // We resolve if a renewable session does not exist
     if (this.isAuthenticated()) return resolve(authSession);
     return this.client.checkSession({}, (err, authResult) => {
