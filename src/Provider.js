@@ -8,19 +8,23 @@ export default function Auth0Provider(props) {
 
   const [authenticated, setAuthenticated] = useState(client.isAuthenticated());
   const [error, setError] = useState();
+  const [authenticating, setAuthenticating] = useState(false);
 
-  function logout() {
+  function logout(logoutProps) {
     setAuthenticated(false);
-    client.logout();
+    client.logout(logoutProps);
   }
 
   async function authenticate() {
     try {
       setError(undefined);
+      setAuthenticating(true);
       await client.authenticate();
       setAuthenticated(client.isAuthenticated());
     } catch (err) {
       setError(err);
+    } finally {
+      setAuthenticating(false);
     }
   }
 
@@ -31,6 +35,7 @@ export default function Auth0Provider(props) {
         logout,
         authenticate,
         authenticated,
+        authenticating,
         error,
       }}
       {...props}

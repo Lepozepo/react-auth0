@@ -48,11 +48,12 @@ export default class Auth0Client {
     this.client.authorize(props);
   };
 
-  logout = () => {
+  logout = (props) => {
     Lockr.rm(this.props.storageKey);
     this.client.logout({
       returnTo: resolveUri(this.props.logoutRedirectUri),
       clientID: this.props.clientID,
+      ...props,
     });
   };
 
