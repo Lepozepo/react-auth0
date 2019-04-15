@@ -10,13 +10,28 @@ export const client = new WebClient({
   clientID,
 });
 
+function Callback() {
+  return (
+    <Authorize>
+      {(authResult) => {
+        if (authResult.error) {
+          alert(authResult.error);
+          return null;
+        }
+        if (authResult.authenticated) return <Redirect to="/" />;
+        return <Loader />;
+      }}
+    </Authorize>
+  );
+}
+
 export default function App() {
   return (
     <Provider client={client}>
       <Router>
         <Route path="/login" component={Login} />
         <Route path="/logout" component={Logout} />
-        <Route path="/authorize" component={Authorize} />
+        <Route path="/authorize" component={Callback} />
       </Router>
     </Provider>
   );
