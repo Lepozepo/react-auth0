@@ -1,6 +1,6 @@
 {
   "name": "react-auth0rize",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Easily integrate your react applications with Auth0",
   "main": "index.js",
   "author": "Marcelo Reyna <lepozepo@gmail.com>",
