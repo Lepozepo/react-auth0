@@ -1,5 +1,7 @@
 # React Auth0
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/Lepozepo/react-auth0.svg)](https://greenkeeper.io/)
+
 ## How to use
 
 ```
