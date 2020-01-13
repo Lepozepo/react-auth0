@@ -810,7 +810,7 @@
     "@types/node" "^10.12.18"
     standard-pkg "^0.4.0"
 
-"@pika/types@^0.3.3", "@pika/types@^0.3.5":
+"@pika/types@^0.3.3":
   version "0.3.15"
   resolved "https://registry.yarnpkg.com/@pika/types/-/types-0.3.15.tgz#fc6bf54154028675148d4ff9e503f3923cfdd92e"
   integrity sha512-neLUTXdXH7rWp5cnciHlQVNXJHWO4WlY5AbgP/3KbR8sM9GayvwoWd0PvYuL2hrii7ugxgJ75gIWKzRgu4PU8Q==
