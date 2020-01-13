@@ -18,7 +18,7 @@ export default class Auth0Client {
     };
 
     const {
-      domain, clientID, redirectUri, responseType, scope,
+      domain, clientID, redirectUri, responseType, scope, audience,
     } = this.props;
 
     this.client = new auth0.WebAuth({
@@ -27,6 +27,7 @@ export default class Auth0Client {
       redirectUri: resolveUri(redirectUri),
       responseType,
       scope,
+      audience,
     });
   }
 
