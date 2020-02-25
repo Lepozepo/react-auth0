@@ -1,18 +1,11 @@
-import { useEffect } from 'react';
 import { func } from 'prop-types';
-import useAuth0 from './useAuth0';
+import useAuthorize from './useAuthorize';
 
 export default function Authorize(props = {}) {
-  const {
-    authenticate,
+  const [{
     authenticated,
-    authenticating,
     error,
-  } = useAuth0();
-
-  useEffect(() => {
-    authenticate();
-  }, []);
+  }, authenticating] = useAuthorize();
 
   return props.children({
     authenticating,
