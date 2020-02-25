@@ -5,7 +5,7 @@
 ## How to use
 
 ```
-import { Provider, WebClient, Login, Logout, Authorize } from 'react-auth0rize';
+import { Provider, WebClient, Login, Logout, useAuthorize } from 'react-auth0rize';
 
 export const client = new WebClient({
   domain,
@@ -13,18 +13,14 @@ export const client = new WebClient({
 });
 
 function Callback() {
-  return (
-    <Authorize>
-      {(authResult) => {
-        if (authResult.error) {
-          alert(authResult.error);
-          return null;
-        }
-        if (authResult.authenticated) return <Redirect to="/" />;
-        return <Loader />;
-      }}
-    </Authorize>
-  );
+  const [authResult, loading] = useAuthorize();
+
+  if (authResult.error) {
+    alert(authResult.error);
+    return null;
+  }
+  if (authResult.authenticated) return <Redirect to="/" />;
+  return <Loader />;
 }
 
 export default function App() {
@@ -60,7 +56,7 @@ export default new WebClient({
 A set of helper classes and functions that provide access to the current authentication state.
 
 ```
-import { Context, Provider, useAuth0 } from 'react-auth0rize';
+import { Context, Provider, useAuth0, useAuthorize } from 'react-auth0rize';
 
 <!-- They all provide -->
 login,
