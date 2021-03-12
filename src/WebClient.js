@@ -99,7 +99,9 @@ export default class Auth0Client {
           this.setSession(authResult);
           resolve(authResult);
         } else {
-          this.logout();
+          Lockr.rm(this.props.storageKey);
+          Lockr.rm(this.props.nonceKey);
+
           reject(err || 'failed to renew session');
         }
       });

@@ -1,0 +1,36 @@
+name: clu
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Use Node 15
+      uses: actions/setup-node@v1
+      with:
+        node-version: '15.x'
+
+    - name: Cache Dependencies
+      uses: actions/cache@v2
+      env:
+        cache-name: cache-node-modules
+      with:
+        # npm cache files are stored in `~/.npm` on Linux/macOS
+        path: |
+          ~/.npm
+          **/node_modules
+        key: ${{runner.os}}-${{env.cache-name}}-${{ hashFiles('**/yarn.lock') }}
+        restore-keys: |
+          ${{runner.os}}-${{env.cache-name}}-
+          ${{runner.os}}-
+
+    - name: Install Dependencies
+      run: yarn
+
+    - name: Test
+      run: yarn test
+      env:
+        CI: true
