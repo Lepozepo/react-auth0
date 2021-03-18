@@ -1,5 +1,5 @@
 import auth0 from 'auth0-js';
-import { startsWith, get } from 'lodash';
+import startsWith from 'lodash/startsWith';
 import Lockr from 'lockr';
 import * as uuid from 'uuid';
 
@@ -35,11 +35,11 @@ export default class Auth0Client {
 
   isAuthenticated = () => {
     const currentAuth = Lockr.get(this.props.storageKey);
-    return new Date().getTime() < get(currentAuth, 'expiresAt');
+    return new Date().getTime() < (currentAuth?.expiresAt || 0);
   };
 
   setSession = (authResult) => {
-    const expiresAt = authResult.expiresIn * 1000 + new Date().getTime();
+    const expiresAt = authResult?.idTokenPayload?.exp * 1000;
 
     Lockr.set(this.props.storageKey, {
       ...authResult,
@@ -94,7 +94,9 @@ export default class Auth0Client {
       const authSession = Lockr.get(this.props.storageKey);
       if (!authSession) return resolve(); // We resolve if a renewable session does not exist
       if (this.isAuthenticated()) return resolve(authSession);
-      return this.client.checkSession({}, (err, authResult) => {
+
+      const nonce = Lockr.get(this.props.nonceKey);
+      return this.client.checkSession({ nonce }, (err, authResult) => {
         if (authResult && authResult.accessToken && authResult.idToken) {
           this.setSession(authResult);
           resolve(authResult);
